@@ -64,6 +64,26 @@
     self.ls_size = newSize;
 }
 
+- (CGFloat)ls_centerX {
+    return self.center.x;
+}
+
+- (void)setLs_centerX:(CGFloat)ls_centerX {
+    CGPoint center = self.center;
+    center.x = ls_centerX;
+    self.center = center;
+}
+
+- (CGFloat)ls_centerY {
+    return self.center.y;
+}
+
+- (void)setLs_centerY:(CGFloat)ls_centerY {
+    CGPoint center = self.center;
+    center.y = ls_centerY;
+    self.center = center;
+}
+
 - (CGPoint)ls_origin {
     return self.frame.origin;
 }

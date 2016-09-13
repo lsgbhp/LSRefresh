@@ -14,8 +14,13 @@
 @property (nonatomic, assign) CGFloat ls_bottom;
 @property (nonatomic, assign) CGFloat ls_left;
 @property (nonatomic, assign) CGFloat ls_right;
+
 @property (nonatomic, assign) CGFloat ls_width;
 @property (nonatomic, assign) CGFloat ls_height;
+
+@property (nonatomic, assign) CGFloat ls_centerX;
+@property (nonatomic, assign) CGFloat ls_centerY;
+
 @property (nonatomic, assign) CGPoint ls_origin;
 @property (nonatomic, assign) CGSize ls_size;
 

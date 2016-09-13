@@ -24,16 +24,17 @@
 
 - (void)configuration {
     self.state = LSRefreshStateIdel;
+    self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    self.clipsToBounds = YES;
 }
 
 - (void)layoutSubviews {
-    [self setupSubviews];
+    [self placeSubviews];
     [super layoutSubviews];
 }
 
-- (void)setupSubviews {
-    
-}
+- (void)setupSubviews {}
+- (void)placeSubviews {}
 
 - (void)willMoveToSuperview:(UIView *)newSuperview {
     [super willMoveToSuperview:newSuperview];
@@ -67,9 +68,9 @@
         self.ls_height = fabs(self.scrollView.ls_offsetY);
     }
     if (self.scrollView.ls_offsetY <= -kLSRefreshTriggerHeight) {
-        self.backgroundColor = [UIColor greenColor];
+//        self.backgroundColor = [UIColor greenColor];
     } else {
-        self.backgroundColor = [UIColor yellowColor];
+//        self.backgroundColor = [UIColor yellowColor];
     }
 }
 

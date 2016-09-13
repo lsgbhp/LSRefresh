@@ -44,8 +44,13 @@ UITableViewDataSource
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CellIdentifier"];
     }
+    cell.backgroundColor = [UIColor lightGrayColor];
     cell.textLabel.text = [NSString stringWithFormat:@"test %@", @(indexPath.row)];
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 80.f;
 }
 
 @end

@@ -140,6 +140,7 @@
 				TargetAttributes = {
 					55942F8A1D86483B00F267A4 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = K3MP8SBSJM;
 					};
 				};
 			};
@@ -297,6 +298,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = K3MP8SBSJM;
 				INFOPLIST_FILE = LSRefreshExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = shanwlin.LSRefreshExample;
@@ -308,6 +310,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = K3MP8SBSJM;
 				INFOPLIST_FILE = LSRefreshExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = shanwlin.LSRefreshExample;

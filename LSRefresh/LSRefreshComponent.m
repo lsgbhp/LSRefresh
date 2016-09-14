@@ -29,12 +29,12 @@
 }
 
 - (void)layoutSubviews {
-    [self placeSubviews];
+    [self locateSubviews];
     [super layoutSubviews];
 }
 
 - (void)setupSubviews {}
-- (void)placeSubviews {}
+- (void)locateSubviews {}
 
 - (void)willMoveToSuperview:(UIView *)newSuperview {
     [super willMoveToSuperview:newSuperview];

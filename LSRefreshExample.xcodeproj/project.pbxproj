@@ -15,8 +15,9 @@
 		55942F9E1D86483B00F267A4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55942F9C1D86483B00F267A4 /* LaunchScreen.storyboard */; };
 		55942FAA1D8648F200F267A4 /* LSRefreshComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 55942FA71D8648F200F267A4 /* LSRefreshComponent.m */; };
 		55942FAB1D8648F200F267A4 /* LSRefreshHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 55942FA91D8648F200F267A4 /* LSRefreshHeader.m */; };
-		55942FB01D865F0500F267A4 /* UIView+LSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 55942FAF1D865F0500F267A4 /* UIView+LSExtension.m */; };
-		55942FB31D8680D000F267A4 /* UIScrollView+LSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 55942FB21D8680D000F267A4 /* UIScrollView+LSExtension.m */; };
+		559B24CC1D88FFAC002B119F /* LSCircleIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 559B24CB1D88FFAC002B119F /* LSCircleIndicator.m */; };
+		559B24D21D88FFFB002B119F /* UIScrollView+LSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 559B24CF1D88FFFB002B119F /* UIScrollView+LSExtension.m */; };
+		559B24D31D88FFFB002B119F /* UIView+LSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 559B24D11D88FFFB002B119F /* UIView+LSExtension.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,10 +36,12 @@
 		55942FA81D8648F200F267A4 /* LSRefreshHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSRefreshHeader.h; sourceTree = "<group>"; };
 		55942FA91D8648F200F267A4 /* LSRefreshHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSRefreshHeader.m; sourceTree = "<group>"; };
 		55942FAD1D86493900F267A4 /* LSRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSRefresh.h; sourceTree = "<group>"; };
-		55942FAE1D865F0500F267A4 /* UIView+LSExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+LSExtension.h"; sourceTree = "<group>"; };
-		55942FAF1D865F0500F267A4 /* UIView+LSExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+LSExtension.m"; sourceTree = "<group>"; };
-		55942FB11D8680D000F267A4 /* UIScrollView+LSExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+LSExtension.h"; sourceTree = "<group>"; };
-		55942FB21D8680D000F267A4 /* UIScrollView+LSExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+LSExtension.m"; sourceTree = "<group>"; };
+		559B24CA1D88FFAC002B119F /* LSCircleIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSCircleIndicator.h; sourceTree = "<group>"; };
+		559B24CB1D88FFAC002B119F /* LSCircleIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSCircleIndicator.m; sourceTree = "<group>"; };
+		559B24CE1D88FFFB002B119F /* UIScrollView+LSExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+LSExtension.h"; sourceTree = "<group>"; };
+		559B24CF1D88FFFB002B119F /* UIScrollView+LSExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+LSExtension.m"; sourceTree = "<group>"; };
+		559B24D01D88FFFB002B119F /* UIView+LSExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+LSExtension.h"; sourceTree = "<group>"; };
+		559B24D11D88FFFB002B119F /* UIView+LSExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+LSExtension.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +58,8 @@
 		55942F821D86483B00F267A4 = {
 			isa = PBXGroup;
 			children = (
+				559B24CD1D88FFFB002B119F /* LSUtil */,
+				559B24C91D88FDBB002B119F /* LSIndicator */,
 				55942FA51D8648F200F267A4 /* LSRefresh */,
 				55942F8D1D86483B00F267A4 /* LSRefreshExample */,
 				55942F8C1D86483B00F267A4 /* Products */,
@@ -101,12 +106,28 @@
 				55942FA81D8648F200F267A4 /* LSRefreshHeader.h */,
 				55942FA91D8648F200F267A4 /* LSRefreshHeader.m */,
 				55942FAD1D86493900F267A4 /* LSRefresh.h */,
-				55942FAE1D865F0500F267A4 /* UIView+LSExtension.h */,
-				55942FAF1D865F0500F267A4 /* UIView+LSExtension.m */,
-				55942FB11D8680D000F267A4 /* UIScrollView+LSExtension.h */,
-				55942FB21D8680D000F267A4 /* UIScrollView+LSExtension.m */,
 			);
 			path = LSRefresh;
+			sourceTree = "<group>";
+		};
+		559B24C91D88FDBB002B119F /* LSIndicator */ = {
+			isa = PBXGroup;
+			children = (
+				559B24CA1D88FFAC002B119F /* LSCircleIndicator.h */,
+				559B24CB1D88FFAC002B119F /* LSCircleIndicator.m */,
+			);
+			path = LSIndicator;
+			sourceTree = "<group>";
+		};
+		559B24CD1D88FFFB002B119F /* LSUtil */ = {
+			isa = PBXGroup;
+			children = (
+				559B24CE1D88FFFB002B119F /* UIScrollView+LSExtension.h */,
+				559B24CF1D88FFFB002B119F /* UIScrollView+LSExtension.m */,
+				559B24D01D88FFFB002B119F /* UIView+LSExtension.h */,
+				559B24D11D88FFFB002B119F /* UIView+LSExtension.m */,
+			);
+			path = LSUtil;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -181,11 +202,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				55942FAA1D8648F200F267A4 /* LSRefreshComponent.m in Sources */,
-				55942FB01D865F0500F267A4 /* UIView+LSExtension.m in Sources */,
+				559B24D21D88FFFB002B119F /* UIScrollView+LSExtension.m in Sources */,
 				55942FAB1D8648F200F267A4 /* LSRefreshHeader.m in Sources */,
 				55942F961D86483B00F267A4 /* ViewController.m in Sources */,
+				559B24CC1D88FFAC002B119F /* LSCircleIndicator.m in Sources */,
 				55942F931D86483B00F267A4 /* AppDelegate.m in Sources */,
-				55942FB31D8680D000F267A4 /* UIScrollView+LSExtension.m in Sources */,
+				559B24D31D88FFFB002B119F /* UIView+LSExtension.m in Sources */,
 				55942F901D86483B00F267A4 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

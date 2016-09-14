@@ -34,7 +34,7 @@ static NSString * const kLSRefreshKeyContentOffset = @"contentOffset";
 
 - (void)configuration;
 - (void)setupSubviews;
-- (void)placeSubviews;
+- (void)locateSubviews;
 
 - (void)scrollViewContentOffsetDidChange:(NSDictionary *)change;
 

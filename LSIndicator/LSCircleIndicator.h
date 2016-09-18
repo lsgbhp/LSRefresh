@@ -10,6 +10,8 @@
 
 @interface LSCircleIndicator : UIView
 
+@property (nonatomic, assign) CGFloat progress;
+
 + (instancetype)indicator;
 
 - (void)startAnimation;

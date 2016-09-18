@@ -32,8 +32,6 @@ static const CGFloat kLSIndicatorRadius = 12.f;
 
 - (void)setupUI {
     
-//    self.clipsToBounds = YES;
-    
     UIBezierPath *circlePath = [UIBezierPath bezierPath];
     [circlePath addArcWithCenter:CGPointMake(kLSIndicatorRadius, kLSIndicatorRadius)
                           radius:kLSIndicatorRadius
@@ -44,7 +42,7 @@ static const CGFloat kLSIndicatorRadius = 12.f;
     CAShapeLayer *circleLayer = [CAShapeLayer layer];
     circleLayer.frame = CGRectMake(0.f, 0.f, kLSIndicatorRadius*2, kLSIndicatorRadius*2);
     circleLayer.path = circlePath.CGPath;
-    circleLayer.lineWidth = 1;
+    circleLayer.lineWidth = 1.5f;
     circleLayer.lineCap = kCALineCapRound;
     circleLayer.strokeColor = [UIColor lightGrayColor].CGColor;
     circleLayer.fillColor = [UIColor clearColor].CGColor;
@@ -62,6 +60,11 @@ static const CGFloat kLSIndicatorRadius = 12.f;
     [super layoutSubviews];
 }
 
+- (void)setProgress:(CGFloat)progress {
+    _progress = progress;
+    
+}
+
 - (void)startAnimation {
     
     CABasicAnimation *rotateAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
@@ -70,16 +73,16 @@ static const CGFloat kLSIndicatorRadius = 12.f;
     rotateAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
     rotateAnimation.autoreverses = NO;
     rotateAnimation.repeatCount = HUGE_VALF;
-    rotateAnimation.duration = 1.5f;
+    rotateAnimation.duration = 1.f;
     [self.circleLayer addAnimation:rotateAnimation forKey:@"rotate"];
     
     CABasicAnimation *strokeEndAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
     strokeEndAnimation.fromValue = @(0.f);
     strokeEndAnimation.toValue = @(1.f);
-    strokeEndAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+    strokeEndAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
     strokeEndAnimation.autoreverses = YES;
     strokeEndAnimation.repeatCount = HUGE_VALF;
-    strokeEndAnimation.duration = 3.f;
+    strokeEndAnimation.duration = 2.f;
     [self.circleLayer addAnimation:strokeEndAnimation forKey:@"strokeEnd"];
 }
 

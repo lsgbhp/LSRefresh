@@ -15,13 +15,14 @@ typedef NS_ENUM(NSUInteger, LSRefreshState) {
     LSRefreshStateIdel = 1,
     LSRefreshStatePulling,
     LSRefreshStateRefreshing,
-    LSRefreshStateFinishing
+    LSRefreshStateWillRefresh
 };
 
 typedef void (^LSRefreshActionBlock)();
 
-static const CGFloat kLSRefreshHeaderHeight = 44.f;
-static const CGFloat kLSRefreshTriggerHeight = 50.f;
+static const CGFloat kLSRefreshHeaderHeight = 50.f;
+static const CGFloat kLSRefreshIdleToPullingHeight = 30.f;
+static const CGFloat kLSRefreshPullingToWillRefreshHeight = 90.f;
 
 static NSString * const kLSRefreshKeyContentOffset = @"contentOffset";
 

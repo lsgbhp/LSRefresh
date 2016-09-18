@@ -16,4 +16,9 @@
 @property (nonatomic, assign) CGFloat ls_contentW;
 @property (nonatomic, assign) CGFloat ls_contentH;
 
+@property (nonatomic, assign) CGFloat ls_insetTop;
+@property (nonatomic, assign) CGFloat ls_insetBottom;
+@property (nonatomic, assign) CGFloat ls_insetLeft;
+@property (nonatomic, assign) CGFloat ls_insetRight;
+
 @end

@@ -50,4 +50,44 @@
     self.contentSize = contentSize;
 }
 
+- (CGFloat)ls_insetTop {
+    return self.contentInset.top;
+}
+
+- (void)setLs_insetTop:(CGFloat)ls_insetTop {
+    UIEdgeInsets contentInset = self.contentInset;
+    contentInset.top = ls_insetTop;
+    self.contentInset = contentInset;
+}
+
+- (CGFloat)ls_insetBottom {
+    return self.contentInset.bottom;
+}
+
+- (void)setLs_insetBottom:(CGFloat)ls_insetBottom {
+    UIEdgeInsets contentInset = self.contentInset;
+    contentInset.bottom = ls_insetBottom;
+    self.contentInset = contentInset;
+}
+
+- (CGFloat)ls_insetLeft {
+    return self.contentInset.left;
+}
+
+- (void)setLs_insetLeft:(CGFloat)ls_insetLeft {
+    UIEdgeInsets contentInset = self.contentInset;
+    contentInset.left = ls_insetLeft;
+    self.contentInset = contentInset;
+}
+
+- (CGFloat)ls_insetRight {
+    return self.contentInset.right;
+}
+
+- (void)setLs_insetRight:(CGFloat)ls_insetRight {
+    UIEdgeInsets contentInset = self.contentInset;
+    contentInset.right = ls_insetRight;
+    self.contentInset = contentInset;
+}
+
 @end

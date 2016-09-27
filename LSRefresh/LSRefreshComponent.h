@@ -15,14 +15,15 @@ typedef NS_ENUM(NSUInteger, LSRefreshState) {
     LSRefreshStateIdel = 1,
     LSRefreshStatePulling,
     LSRefreshStateRefreshing,
-    LSRefreshStateWillRefresh
+    LSRefreshStateWillRefresh,
+    LSRefreshStateFinish
 };
 
 typedef void (^LSRefreshActionBlock)();
 
-static const CGFloat kLSRefreshHeaderHeight = 50.f;
-static const CGFloat kLSRefreshIdleToPullingHeight = 30.f;
-static const CGFloat kLSRefreshPullingToWillRefreshHeight = 90.f;
+static const CGFloat kLSRefreshHeaderHeight = 60.f;
+static const CGFloat kLSRefreshIdleToPullingHeight = 20.f;
+static const CGFloat kLSRefreshPullingToWillRefreshHeight = 100.f;
 
 static NSString * const kLSRefreshKeyContentOffset = @"contentOffset";
 
@@ -36,6 +37,9 @@ static NSString * const kLSRefreshKeyContentOffset = @"contentOffset";
 - (void)configuration;
 - (void)setupSubviews;
 - (void)locateSubviews;
+
+- (void)beginRefreshing;
+- (void)endRefreshing;
 
 - (void)scrollViewContentOffsetDidChange:(NSDictionary *)change;
 

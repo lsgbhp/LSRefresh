@@ -42,7 +42,7 @@ static const CGFloat kLSIndicatorRadius = 12.f;
     CAShapeLayer *circleLayer = [CAShapeLayer layer];
     circleLayer.frame = CGRectMake(0.f, 0.f, kLSIndicatorRadius*2, kLSIndicatorRadius*2);
     circleLayer.path = circlePath.CGPath;
-    circleLayer.lineWidth = 1.5f;
+    circleLayer.lineWidth = 1.f;
     circleLayer.lineCap = kCALineCapRound;
     circleLayer.strokeColor = [UIColor lightGrayColor].CGColor;
     circleLayer.fillColor = [UIColor clearColor].CGColor;
@@ -62,7 +62,7 @@ static const CGFloat kLSIndicatorRadius = 12.f;
 
 - (void)setProgress:(CGFloat)progress {
     _progress = progress;
-    
+    self.circleLayer.strokeEnd = progress;
 }
 
 - (void)startAnimation {

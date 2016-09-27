@@ -62,47 +62,15 @@
     [self.superview removeObserver:self forKeyPath:kLSRefreshKeyContentOffset];
 }
 
-- (void)scrollViewContentOffsetDidChange:(NSDictionary *)change {
-    
-    NSLog(@"inset: %@", NSStringFromUIEdgeInsets(self.scrollView.contentInset));
-    NSLog(@"offset: %@", NSStringFromCGPoint(self.scrollView.contentOffset));
-    NSLog(@"height: %@", @(self.ls_height));
-    
-    if (self.scrollView.ls_offsetY <= -self.scrollView.ls_insetTop) {
-        self.ls_top = self.scrollView.ls_offsetY + self.scrollView.ls_insetTop;
-        self.ls_height = fabs(self.scrollView.ls_insetTop + self.scrollView.ls_offsetY);
-    }
-    
-    if (self.state != LSRefreshStateRefreshing){
-        if (self.ls_height < kLSRefreshIdleToPullingHeight) {
-            self.state = LSRefreshStateIdel;
-        } else if (self.ls_height < kLSRefreshPullingToWillRefreshHeight) {
-            self.state = LSRefreshStatePulling;
-        } else if (self.ls_height >= kLSRefreshPullingToWillRefreshHeight) {
-            self.state = LSRefreshStateWillRefresh;
-            if (!self.scrollView.isDragging) {
-                [self beginRefreshing];
-            }
-        }
-    }
-}
+- (void)scrollViewContentOffsetDidChange:(NSDictionary *)change {}
 
 - (void)setState:(LSRefreshState)state {
-    
-    if (state == _state) return;
     _state = state;
     
-    if (state == LSRefreshStateRefreshing) {
-        [self.scrollView setContentOffset:CGPointMake(self.scrollView.ls_offsetX, -(self.scrollView.ls_insetTop + kLSRefreshHeaderHeight)) animated:YES];
-        self.scrollView.scrollEnabled = NO;
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self endRefreshing];
+    if (_state == LSRefreshStateRefreshing) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.actionBlock ? self.actionBlock() : nil;
         });
-    
-    } else if (state == LSRefreshStateIdel) {
-        [self.scrollView setContentOffset:CGPointMake(self.scrollView.ls_offsetX, -self.scrollView.ls_insetTop) animated:YES];
-        self.scrollView.scrollEnabled = YES;
     }
 }
 
@@ -113,7 +81,7 @@
 }
 
 - (void)endRefreshing {
-    self.state = LSRefreshStateIdel;
+    self.state = LSRefreshStateFinish;
 }
 
 #pragma mark - KVO Methods

@@ -11,5 +11,4 @@
 
 #import "LSRefreshHeader.h"
 
-
 #endif /* LSRefresh_h */

@@ -16,6 +16,7 @@ UITableViewDataSource
 >
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) LSRefreshHeader *refreshHeader;
 
 @end
 
@@ -24,18 +25,20 @@ UITableViewDataSource
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    LSRefreshHeader *header = [LSRefreshHeader headerWithActionBlock:nil];
-    [self.tableView addSubview:header];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    __weak typeof(self) weakSelf = self;
+    self.refreshHeader = [LSRefreshHeader headerWithActionBlock:^{
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        NSLog(@"trigger action block！！！！！！");
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [strongSelf.refreshHeader endRefreshing];
+        });
+    }];
+    [self.tableView addSubview:self.refreshHeader];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-//    self.tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
+    self.tableView.contentInset = UIEdgeInsetsMake(30, 0, 0, 0);
 }
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource

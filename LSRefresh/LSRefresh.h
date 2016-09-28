@@ -10,5 +10,6 @@
 #define LSRefresh_h
 
 #import "LSRefreshHeader.h"
+#import "LSRefreshFooter.h"
 
 #endif /* LSRefresh_h */

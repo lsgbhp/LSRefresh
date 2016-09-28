@@ -3,11 +3,15 @@
 //  remix
 //
 //  Created by ShawnLin on 16/9/9.
-//  Copyright © 2016年 fongtinyik. All rights reserved.
+//  Copyright © 2016年 ShawnLin. All rights reserved.
 //
 
 #import "LSRefreshHeader.h"
 #import "LSCircleIndicator.h"
+
+static const CGFloat kLSRefreshHeaderHeight = 60.f;
+static const CGFloat kLSRefreshHeaderIdleToPullingHeight = 30.f;
+static const CGFloat kLSRefreshHeaderPullingToWillRefreshHeight = 100.f;
 
 @interface LSRefreshHeader ()
 
@@ -23,10 +27,6 @@
     LSRefreshHeader *header = [[LSRefreshHeader alloc] init];
     header.actionBlock = actionBlock;
     return header;
-}
-
-- (void)configuration {
-    [super configuration];
 }
 
 - (void)setupSubviews {
@@ -55,9 +55,8 @@
     self.infoLabel.ls_centerY = self.indicator.ls_centerY;
     
     self.contentView.ls_height = (self.infoLabel.ls_height > self.indicator.ls_height) ? self.infoLabel.ls_height : self.indicator.ls_height;
-    self.contentView.ls_width = self.infoLabel.ls_width + self.indicator.ls_width + 15.f;
-    self.contentView.ls_left = self.ls_width * 0.38;
-    self.contentView.ls_centerY = self.ls_height * 0.5;
+    self.contentView.ls_width = self.infoLabel.ls_right;
+    self.contentView.center = CGPointMake(self.ls_width*0.5, self.ls_height*0.5);
 }
 
 - (void)setState:(LSRefreshState)state {
@@ -76,11 +75,11 @@
     if (state == LSRefreshStateIdel) {
         self.infoLabel.text = @"下拉刷新";
     } else if (state == LSRefreshStatePulling) {
-        self.infoLabel.text = @"用力下拉";
+        self.infoLabel.text = @"下拉刷新";
     } else if (state == LSRefreshStateWillRefresh) {
         self.infoLabel.text = @"释放刷新";
     } else if (state == LSRefreshStateRefreshing) {
-        self.infoLabel.text = @"加载中";
+        self.infoLabel.text = @"刷新中..";
     } else if (state == LSRefreshStateFinish) {
         self.infoLabel.text = @"刷新完毕";
     }
@@ -114,31 +113,36 @@
     // 根据高度修改控件状态
     if (self.state != LSRefreshStateRefreshing && self.state != LSRefreshStateFinish){
         
-        if (self.ls_height < kLSRefreshIdleToPullingHeight) {
-            self.state = LSRefreshStateIdel;
-            
-        } else if (self.ls_height >= kLSRefreshIdleToPullingHeight && self.ls_height < kLSRefreshPullingToWillRefreshHeight) {
-            self.state = LSRefreshStatePulling;
-            
-        } else if (self.ls_height >= kLSRefreshPullingToWillRefreshHeight) {
-            self.state = LSRefreshStateWillRefresh;
-            if (!self.scrollView.isDragging) {
+        if (self.scrollView.isDragging) {
+            if (self.ls_height < kLSRefreshHeaderIdleToPullingHeight) {
+                self.state = LSRefreshStateIdel;
+                
+            } else if (self.ls_height >= kLSRefreshHeaderIdleToPullingHeight && self.ls_height < kLSRefreshHeaderPullingToWillRefreshHeight) {
+                self.state = LSRefreshStatePulling;
+                
+            } else if (self.ls_height >= kLSRefreshHeaderPullingToWillRefreshHeight) {
+                self.state = LSRefreshStateWillRefresh;
+            }
+        } else  {
+            if (self.state == LSRefreshStateWillRefresh) {
                 [self beginRefreshing];
             }
         }
+        
     }
     
     // 根据高度调整Indicator UI
     if (self.state != LSRefreshStateRefreshing) {
-        if (self.ls_height <= kLSRefreshPullingToWillRefreshHeight) {
+        
+        if (self.ls_height <= kLSRefreshHeaderPullingToWillRefreshHeight) {
             if (self.state != LSRefreshStateFinish) {
-                CGFloat progress = self.ls_height/kLSRefreshPullingToWillRefreshHeight;
-                self.indicator.progress = progress;
+                CGFloat progress = self.ls_height/kLSRefreshHeaderPullingToWillRefreshHeight;
+                self.indicator.progress = self.contentView.alpha = progress;
             } else {
-                self.indicator.progress = 1.f;
+                self.indicator.progress = self.contentView.alpha = 1.f;
             }
         } else {
-            self.indicator.progress = 1.f;
+            self.indicator.progress = self.contentView.alpha = 1.f;
         }
     }
 }

@@ -3,7 +3,7 @@
 //  remix
 //
 //  Created by ShawnLin on 16/9/9.
-//  Copyright © 2016年 fongtinyik. All rights reserved.
+//  Copyright © 2016年 ShawnLin. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -21,11 +21,8 @@ typedef NS_ENUM(NSUInteger, LSRefreshState) {
 
 typedef void (^LSRefreshActionBlock)();
 
-static const CGFloat kLSRefreshHeaderHeight = 60.f;
-static const CGFloat kLSRefreshIdleToPullingHeight = 20.f;
-static const CGFloat kLSRefreshPullingToWillRefreshHeight = 100.f;
-
 static NSString * const kLSRefreshKeyContentOffset = @"contentOffset";
+static NSString * const kLSRefreshKeyContentSize = @"contentSize";
 
 @interface LSRefreshComponent : UIView
 
@@ -42,5 +39,6 @@ static NSString * const kLSRefreshKeyContentOffset = @"contentOffset";
 - (void)endRefreshing;
 
 - (void)scrollViewContentOffsetDidChange:(NSDictionary *)change;
+- (void)scrollViewContentSizeDidChange:(NSDictionary *)change;
 
 @end

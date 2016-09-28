@@ -3,7 +3,7 @@
 //  remix
 //
 //  Created by ShawnLin on 16/9/9.
-//  Copyright © 2016年 fongtinyik. All rights reserved.
+//  Copyright © 2016年 ShawnLin. All rights reserved.
 //
 
 #import "LSRefreshComponent.h"
@@ -20,6 +20,10 @@
         [self setupSubviews];
     }
     return self;
+}
+
+- (void)dealloc {
+    [self removeObserver];
 }
 
 - (void)configuration {
@@ -56,13 +60,20 @@
 - (void)addObserver {
     NSKeyValueObservingOptions options = NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld;
     [self.scrollView addObserver:self forKeyPath:kLSRefreshKeyContentOffset options:options context:nil];
+    [self.scrollView addObserver:self forKeyPath:kLSRefreshKeyContentSize options:options context:nil];
 }
 
 - (void)removeObserver {
     [self.superview removeObserver:self forKeyPath:kLSRefreshKeyContentOffset];
+    [self.superview removeObserver:self forKeyPath:kLSRefreshKeyContentSize];
 }
 
-- (void)scrollViewContentOffsetDidChange:(NSDictionary *)change {}
+- (void)scrollViewContentOffsetDidChange:(NSDictionary *)change {
+//    NSLog(@"contentOffset: %@", NSStringFromCGPoint(self.scrollView.contentOffset));
+//    NSLog(@"contentSize: %@", NSStringFromCGSize(self.scrollView.contentSize));
+//    NSLog(@"scrollBound: %@", NSStringFromCGRect(self.scrollView.bounds));
+}
+- (void)scrollViewContentSizeDidChange:(NSDictionary *)change {}
 
 - (void)setState:(LSRefreshState)state {
     _state = state;
@@ -89,6 +100,9 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
     if ([keyPath isEqualToString:kLSRefreshKeyContentOffset]) {
         [self scrollViewContentOffsetDidChange:change];
+    }
+    if ([keyPath isEqualToString:kLSRefreshKeyContentSize]) {
+        [self scrollViewContentSizeDidChange:change];
     }
 }
 

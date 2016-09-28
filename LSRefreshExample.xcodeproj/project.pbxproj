@@ -18,6 +18,7 @@
 		559B24CC1D88FFAC002B119F /* LSCircleIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 559B24CB1D88FFAC002B119F /* LSCircleIndicator.m */; };
 		559B24D21D88FFFB002B119F /* UIScrollView+LSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 559B24CF1D88FFFB002B119F /* UIScrollView+LSExtension.m */; };
 		559B24D31D88FFFB002B119F /* UIView+LSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 559B24D11D88FFFB002B119F /* UIView+LSExtension.m */; };
+		55E273321D9B6DD30046D5D5 /* LSRefreshFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E273311D9B6DD30046D5D5 /* LSRefreshFooter.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,8 @@
 		559B24CF1D88FFFB002B119F /* UIScrollView+LSExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+LSExtension.m"; sourceTree = "<group>"; };
 		559B24D01D88FFFB002B119F /* UIView+LSExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+LSExtension.h"; sourceTree = "<group>"; };
 		559B24D11D88FFFB002B119F /* UIView+LSExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+LSExtension.m"; sourceTree = "<group>"; };
+		55E273301D9B6DD30046D5D5 /* LSRefreshFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSRefreshFooter.h; sourceTree = "<group>"; };
+		55E273311D9B6DD30046D5D5 /* LSRefreshFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSRefreshFooter.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +108,8 @@
 				55942FA71D8648F200F267A4 /* LSRefreshComponent.m */,
 				55942FA81D8648F200F267A4 /* LSRefreshHeader.h */,
 				55942FA91D8648F200F267A4 /* LSRefreshHeader.m */,
+				55E273301D9B6DD30046D5D5 /* LSRefreshFooter.h */,
+				55E273311D9B6DD30046D5D5 /* LSRefreshFooter.m */,
 				55942FAD1D86493900F267A4 /* LSRefresh.h */,
 			);
 			path = LSRefresh;
@@ -209,6 +214,7 @@
 				55942F931D86483B00F267A4 /* AppDelegate.m in Sources */,
 				559B24D31D88FFFB002B119F /* UIView+LSExtension.m in Sources */,
 				55942F901D86483B00F267A4 /* main.m in Sources */,
+				55E273321D9B6DD30046D5D5 /* LSRefreshFooter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

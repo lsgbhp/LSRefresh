@@ -53,13 +53,14 @@ UITableViewDataSource
         });
     }];
     
+    self.tableView.tableFooterView = [UIView new];
 //    self.tableView.contentInset = UIEdgeInsetsMake(30, 0, 10, 0);
     
     [self.tableView addSubview:self.refreshHeader];
     [self.tableView addSubview:self.refreshFooter];
     
     self.dataSource = [NSMutableArray new];
-    for (NSUInteger i = 0; i < 10; i++) {
+    for (NSUInteger i = 0; i < 3; i++) {
         [self.dataSource addObject:@"1"];
     }
 }

@@ -74,8 +74,14 @@ static const CGFloat kLSRefreshFooterHeight = 50.f;
     if (state == self.state) return;
     
     if (state ==  LSRefreshStateRefreshing) {
-        [self.scrollView setContentOffset:CGPointMake(0.f, self.scrollView.ls_contentH+self.scrollView.ls_insetBottom-self.scrollView.ls_height) animated:YES];
+        CGFloat offsetY = self.scrollView.ls_contentH+self.scrollView.ls_insetBottom-self.scrollView.ls_height;
+        if (self.scrollView.ls_contentH < self.scrollView.ls_height) {
+            offsetY = self.ls_bottom - self.scrollView.ls_height;
+        }
+        [self.scrollView setContentOffset:CGPointMake(0.f, offsetY) animated:YES];
+    
         self.scrollView.scrollEnabled = NO;
+    
     } else if (self.state == LSRefreshStateRefreshing && state == LSRefreshStateFinish) {
         self.scrollView.scrollEnabled = YES;
     }
@@ -120,7 +126,11 @@ static const CGFloat kLSRefreshFooterHeight = 50.f;
 
 - (void)scrollViewContentSizeDidChange:(NSDictionary *)change {
     [super scrollViewContentSizeDidChange:change];
-    self.ls_top = self.scrollView.ls_contentH;
+    if (self.scrollView.ls_contentH > self.scrollView.ls_height) {
+        self.ls_top = self.scrollView.ls_contentH;
+    } else {
+        self.ls_top = self.scrollView.ls_height;
+    }
     self.state = LSRefreshStateIdel;
 }
 

@@ -69,9 +69,9 @@
 }
 
 - (void)scrollViewContentOffsetDidChange:(NSDictionary *)change {
-//    NSLog(@"contentOffset: %@", NSStringFromCGPoint(self.scrollView.contentOffset));
-//    NSLog(@"contentSize: %@", NSStringFromCGSize(self.scrollView.contentSize));
-//    NSLog(@"scrollBound: %@", NSStringFromCGRect(self.scrollView.bounds));
+    NSLog(@"contentOffset: %@", NSStringFromCGPoint(self.scrollView.contentOffset));
+    NSLog(@"contentSize: %@", NSStringFromCGSize(self.scrollView.contentSize));
+    NSLog(@"scrollBound: %@", NSStringFromCGRect(self.scrollView.bounds));
 }
 - (void)scrollViewContentSizeDidChange:(NSDictionary *)change {}
 

@@ -1,6 +1,6 @@
 # LSRefresh
 
-## DEMO
+## Demo
 ![demo](https://github.com/lsgbhp/LSRefresh/blob/master/demo.gif)
 
 ## Usage

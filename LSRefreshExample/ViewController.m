@@ -18,8 +18,11 @@ UITableViewDataSource
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *dataSource;
 
-@property (strong, nonatomic) LSRefreshHeader *refreshHeader;
-@property (strong, nonatomic) LSRefreshFooter *refreshFooter;
+//@property (strong, nonatomic) LSRefreshHeader *refreshHeader;
+//@property (strong, nonatomic) LSRefreshFooter *refreshFooter;
+
+@property (strong, nonatomic) LSRefreshNativeHeader *refreshNativeHeader;
+@property (strong, nonatomic) LSRefreshAutoFooter *refreshAutoFooter;
 
 @end
 
@@ -28,44 +31,64 @@ UITableViewDataSource
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    __weak typeof(self) weakSelf = self;
-    
-    self.refreshHeader = [LSRefreshHeader headerWithActionBlock:^{
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        
-        NSLog(@"trigger header action block！！！！！！");
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [strongSelf.refreshHeader endRefreshing];
-        });
-    }];
-    [self.tableView addSubview:self.refreshHeader];
-    
-    self.refreshFooter = [LSRefreshFooter footerWithActionBlock:^{
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        
-        NSLog(@"triiger footer action block！！！！！");
-        
-        for (NSUInteger i = 0; i < 10; i++) {
-            [strongSelf.dataSource addObject:@"1"];
-        }
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [strongSelf.refreshFooter endRefreshing];
-            [strongSelf.tableView reloadData];
-            if (strongSelf.dataSource.count > 30) {
-                strongSelf.refreshFooter.hidden = YES;
-            }
-        });
-    }];
-    [self.tableView addSubview:self.refreshFooter];
-    
+    self.automaticallyAdjustsScrollViewInsets = NO;
     self.tableView.tableFooterView = [UIView new];
+    [self addMoreData];
     
-    self.dataSource = [NSMutableArray new];
+    __weak typeof(self) weakSelf = self;
+    self.refreshNativeHeader = [LSRefreshNativeHeader nativeHeaderWithActionBlock:^{
+        NSLog(@"trigger native header action");
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [strongSelf.refreshNativeHeader endRefreshing];
+        });
+    }];
+    [self.tableView addSubview:self.refreshNativeHeader];
+    
+    self.refreshAutoFooter = [LSRefreshAutoFooter autoFooterWithActionBlock:^{
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        NSLog(@"trigger auto footer action");
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [strongSelf addMoreData];
+            [strongSelf.tableView reloadData];
+            [strongSelf.refreshAutoFooter endRefreshing];
+        });
+    }];
+    [self.tableView addSubview:self.refreshAutoFooter];
+
+
+    
+//    __weak typeof(self) weakSelf = self;
+//    self.refreshHeader = [LSRefreshHeader headerWithActionBlock:^{
+//        __strong typeof(weakSelf) strongSelf = weakSelf;
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            [strongSelf.refreshHeader endRefreshing];
+//        });
+//    }];
+//    [self.tableView addSubview:self.refreshHeader];
+//    
+//    self.refreshFooter = [LSRefreshFooter footerWithActionBlock:^{
+//        __strong typeof(weakSelf) strongSelf = weakSelf;
+//        [strongSelf addMoreData];
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            [strongSelf.refreshFooter endRefreshing];
+//            [strongSelf.tableView reloadData];
+//        });
+//    }];
+//    [self.tableView addSubview:self.refreshFooter];
+}
+
+- (void)addMoreData {
     for (NSUInteger i = 0; i < 10; i++) {
         [self.dataSource addObject:@"1"];
     }
+}
+
+- (NSMutableArray *)dataSource {
+    if (!_dataSource) {
+        _dataSource = [NSMutableArray new];
+    }
+    return _dataSource;
 }
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource
@@ -79,13 +102,12 @@ UITableViewDataSource
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CellIdentifier"];
     }
-    cell.backgroundColor = [UIColor lightGrayColor];
     cell.textLabel.text = [NSString stringWithFormat:@"test %@", @(indexPath.row)];
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 80.f;
+    return 60.f;
 }
 
 @end

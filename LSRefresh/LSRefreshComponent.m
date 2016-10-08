@@ -29,7 +29,7 @@
 - (void)configuration {
     self.state = LSRefreshStateIdel;
     self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    self.clipsToBounds = YES;
+//    self.clipsToBounds = YES;
 }
 
 - (void)layoutSubviews {
@@ -68,16 +68,12 @@
     [self.superview removeObserver:self forKeyPath:kLSRefreshKeyContentSize];
 }
 
-- (void)scrollViewContentOffsetDidChange:(NSDictionary *)change {
-    NSLog(@"contentOffset: %@", NSStringFromCGPoint(self.scrollView.contentOffset));
-    NSLog(@"contentSize: %@", NSStringFromCGSize(self.scrollView.contentSize));
-    NSLog(@"scrollBound: %@", NSStringFromCGRect(self.scrollView.bounds));
-}
+- (void)scrollViewContentOffsetDidChange:(NSDictionary *)change {}
 - (void)scrollViewContentSizeDidChange:(NSDictionary *)change {}
 
 - (void)setState:(LSRefreshState)state {
+    if (state == self.state) return;
     _state = state;
-    
     if (_state == LSRefreshStateRefreshing) {
         dispatch_async(dispatch_get_main_queue(), ^{
             self.actionBlock ? self.actionBlock() : nil;

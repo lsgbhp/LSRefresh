@@ -10,6 +10,9 @@
 #define LSRefresh_h
 
 #import "LSRefreshHeader.h"
+#import "LSRefreshNativeHeader.h"
 #import "LSRefreshFooter.h"
+#import "LSRefreshAutoFooter.h"
+
 
 #endif /* LSRefresh_h */

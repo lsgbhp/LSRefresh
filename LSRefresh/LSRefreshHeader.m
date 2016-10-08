@@ -24,7 +24,7 @@ static const CGFloat kLSRefreshHeaderPullingToWillRefreshHeight = 100.f;
 @implementation LSRefreshHeader
 
 + (instancetype)headerWithActionBlock:(LSRefreshActionBlock)actionBlock {
-    LSRefreshHeader *header = [[LSRefreshHeader alloc] init];
+    LSRefreshHeader *header = [LSRefreshHeader new];
     header.actionBlock = actionBlock;
     return header;
 }

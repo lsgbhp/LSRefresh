@@ -22,7 +22,7 @@ static const CGFloat kLSRefreshFooterHeight = 50.f;
 @implementation LSRefreshFooter
 
 + (instancetype)footerWithActionBlock:(LSRefreshActionBlock)actionBlock {
-    LSRefreshFooter *footer = [[LSRefreshFooter alloc] init];
+    LSRefreshFooter *footer = [LSRefreshFooter new];
     footer.actionBlock = actionBlock;
     return footer;
 }
@@ -87,9 +87,9 @@ static const CGFloat kLSRefreshFooterHeight = 50.f;
     }
     
     if (state == LSRefreshStateIdel) {
-        self.infoLabel.text = @"加载更多";
+        self.infoLabel.text = @"上拉加载";
     } else if (state == LSRefreshStatePulling) {
-        self.infoLabel.text = @"加载更多";
+        self.infoLabel.text = @"上拉加载";
     } else if (state == LSRefreshStateWillRefresh) {
         self.infoLabel.text = @"释放加载";
     } else if (state == LSRefreshStateRefreshing) {
@@ -118,8 +118,12 @@ static const CGFloat kLSRefreshFooterHeight = 50.f;
     if (!self.hidden) {
         if (self.scrollView.ls_offsetY + self.scrollView.ls_height > self.ls_bottom) {
             self.state = LSRefreshStateWillRefresh;
-        } else if (self.state == LSRefreshStateWillRefresh && self.state != LSRefreshStateRefreshing) {
-            [self beginRefreshing];
+        } else {
+            if (self.scrollView.isDragging) {
+                self.state = LSRefreshStateIdel;
+            } else if (self.state == LSRefreshStateWillRefresh) {
+                [self beginRefreshing];
+            }
         }
     }
 }

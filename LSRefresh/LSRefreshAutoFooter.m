@@ -8,7 +8,7 @@
 
 #import "LSRefreshAutoFooter.h"
 
-static const CGFloat kLSRefreshAutoFooterTriggerDistance = 50.f;
+static const CGFloat kLSRefreshAutoFooterTriggerDistance = 100.f;
 
 @interface LSRefreshAutoFooter ()
 

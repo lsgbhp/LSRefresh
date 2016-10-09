@@ -61,13 +61,13 @@ static const CGFloat kLSRefreshHeaderPullingToWillRefreshHeight = 100.f;
 
 - (void)setState:(LSRefreshState)state {
     
-    if (state == self.state) return;
+//    if (state == self.state) return;
     
-    if (state == LSRefreshStateRefreshing && self.state == LSRefreshStateWillRefresh) {
+    if (state == LSRefreshStateRefreshing) {
         [self.scrollView setContentOffset:CGPointMake(self.scrollView.ls_offsetX, -(self.scrollView.ls_insetTop + kLSRefreshHeaderHeight)) animated:YES];
         self.scrollView.scrollEnabled = NO;
         
-    } else if (state == LSRefreshStateFinish && self.state == LSRefreshStateRefreshing) {
+    } else if (state == LSRefreshStateFinish) {
         [self.scrollView setContentOffset:CGPointMake(self.scrollView.ls_offsetX, -self.scrollView.ls_insetTop) animated:YES];
         self.scrollView.scrollEnabled = YES;
     }
@@ -92,7 +92,6 @@ static const CGFloat kLSRefreshHeaderPullingToWillRefreshHeight = 100.f;
     [self.indicator startAnimation];
 }
 
-
 - (void)endRefreshing {
     [super endRefreshing];
     [self.indicator stopAnimation];
@@ -107,12 +106,13 @@ static const CGFloat kLSRefreshHeaderPullingToWillRefreshHeight = 100.f;
         self.ls_height = fabs(self.scrollView.ls_insetTop + self.scrollView.ls_offsetY);
     } else {
         self.ls_top = self.ls_height = 0.f;
-        self.state = LSRefreshStateIdel;
+        if (self.state == LSRefreshStateFinish) {
+            self.state = LSRefreshStateIdel;
+        }
     }
     
     // 根据高度修改控件状态
     if (self.state != LSRefreshStateRefreshing && self.state != LSRefreshStateFinish){
-        
         if (self.scrollView.isDragging) {
             if (self.ls_height < kLSRefreshHeaderIdleToPullingHeight) {
                 self.state = LSRefreshStateIdel;
@@ -128,12 +128,10 @@ static const CGFloat kLSRefreshHeaderPullingToWillRefreshHeight = 100.f;
                 [self beginRefreshing];
             }
         }
-        
     }
     
     // 根据高度调整Indicator UI
     if (self.state != LSRefreshStateRefreshing) {
-        
         if (self.ls_height <= kLSRefreshHeaderPullingToWillRefreshHeight) {
             if (self.state != LSRefreshStateFinish) {
                 CGFloat progress = self.ls_height/kLSRefreshHeaderPullingToWillRefreshHeight;
@@ -144,6 +142,8 @@ static const CGFloat kLSRefreshHeaderPullingToWillRefreshHeight = 100.f;
         } else {
             self.indicator.progress = self.contentView.alpha = 1.f;
         }
+    } else {
+        self.contentView.alpha = 1.f;
     }
 }
 

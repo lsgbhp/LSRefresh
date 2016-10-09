@@ -82,7 +82,7 @@ static const CGFloat kLSRefreshFooterHeight = 50.f;
     
         self.scrollView.scrollEnabled = NO;
     
-    } else if (self.state == LSRefreshStateRefreshing && state == LSRefreshStateFinish) {
+    } else if (state == LSRefreshStateFinish) {
         self.scrollView.scrollEnabled = YES;
     }
     

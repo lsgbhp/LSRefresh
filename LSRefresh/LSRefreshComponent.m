@@ -29,7 +29,7 @@
 - (void)configuration {
     self.state = LSRefreshStateIdel;
     self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-//    self.clipsToBounds = YES;
+    self.clipsToBounds = YES;
 }
 
 - (void)layoutSubviews {

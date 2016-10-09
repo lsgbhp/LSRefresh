@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "SubViewController.h"
 #import "LSRefresh.h"
 
 @interface ViewController ()
@@ -16,13 +17,8 @@ UITableViewDataSource
 >
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) NSMutableArray *dataSource;
-
-//@property (strong, nonatomic) LSRefreshHeader *refreshHeader;
-//@property (strong, nonatomic) LSRefreshFooter *refreshFooter;
-
-@property (strong, nonatomic) LSRefreshNativeHeader *refreshNativeHeader;
-@property (strong, nonatomic) LSRefreshAutoFooter *refreshAutoFooter;
+@property (strong, nonatomic) NSArray *dataSource;
+@property (assign, nonatomic) NSUInteger selectedIndex;
 
 @end
 
@@ -33,62 +29,23 @@ UITableViewDataSource
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.tableView.tableFooterView = [UIView new];
-    [self addMoreData];
     
-    __weak typeof(self) weakSelf = self;
-    self.refreshNativeHeader = [LSRefreshNativeHeader nativeHeaderWithActionBlock:^{
-        NSLog(@"trigger native header action");
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [strongSelf.refreshNativeHeader endRefreshing];
-        });
-    }];
-    [self.tableView addSubview:self.refreshNativeHeader];
-    
-    self.refreshAutoFooter = [LSRefreshAutoFooter autoFooterWithActionBlock:^{
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        NSLog(@"trigger auto footer action");
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [strongSelf addMoreData];
-            [strongSelf.tableView reloadData];
-            [strongSelf.refreshAutoFooter endRefreshing];
-        });
-    }];
-    [self.tableView addSubview:self.refreshAutoFooter];
-
-
-    
-//    __weak typeof(self) weakSelf = self;
-//    self.refreshHeader = [LSRefreshHeader headerWithActionBlock:^{
-//        __strong typeof(weakSelf) strongSelf = weakSelf;
-//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//            [strongSelf.refreshHeader endRefreshing];
-//        });
-//    }];
-//    [self.tableView addSubview:self.refreshHeader];
-//    
-//    self.refreshFooter = [LSRefreshFooter footerWithActionBlock:^{
-//        __strong typeof(weakSelf) strongSelf = weakSelf;
-//        [strongSelf addMoreData];
-//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//            [strongSelf.refreshFooter endRefreshing];
-//            [strongSelf.tableView reloadData];
-//        });
-//    }];
-//    [self.tableView addSubview:self.refreshFooter];
+    self.navigationItem.title = @"LSRefresh";
+    self.dataSource = @[
+                        @"普通下拉刷新",
+                        @"普通上拉刷新",
+                        @"原生UIRefreshControl下拉刷新",
+                        @"自动上拉刷新",
+                        @"普通下拉刷新 + 普通上拉刷新",
+                        @"原生UIRefreshControl下拉刷新 + 自动上拉刷新"
+                        ];
 }
 
-- (void)addMoreData {
-    for (NSUInteger i = 0; i < 10; i++) {
-        [self.dataSource addObject:@"1"];
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:NSStringFromClass([SubViewController class])]) {
+        SubViewController *destVC = segue.destinationViewController;
+        destVC.type = self.selectedIndex;
     }
-}
-
-- (NSMutableArray *)dataSource {
-    if (!_dataSource) {
-        _dataSource = [NSMutableArray new];
-    }
-    return _dataSource;
 }
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource
@@ -102,12 +59,19 @@ UITableViewDataSource
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CellIdentifier"];
     }
-    cell.textLabel.text = [NSString stringWithFormat:@"test %@", @(indexPath.row)];
+    cell.textLabel.text = [self.dataSource objectAtIndex:indexPath.row];
+    cell.textLabel.font = [UIFont systemFontOfSize:16.f];
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 60.f;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    self.selectedIndex = indexPath.row;
+    [self performSegueWithIdentifier:NSStringFromClass([SubViewController class]) sender:self];
 }
 
 @end

@@ -8,6 +8,8 @@
 
 #import "LSRefreshNativeHeader.h"
 
+static const CGFloat kLSRefreshNativeHeaderHeight = 60.f;
+
 @interface LSRefreshNativeHeader ()
 
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
@@ -38,6 +40,18 @@
 - (void)removeFromSuperview {
     [self.refreshControl removeFromSuperview];
     [super removeFromSuperview];
+}
+
+- (void)setState:(LSRefreshState)state {
+    
+    if (state == self.state) return;
+    
+    if (state == LSRefreshStateRefreshing) {
+        [self.scrollView setContentOffset:CGPointMake(0, -(self.scrollView.ls_insetTop+kLSRefreshNativeHeaderHeight)) animated:YES];
+        [self.refreshControl beginRefreshing];
+    }
+    
+    [super setState:state];
 }
 
 - (void)beginRefreshing {

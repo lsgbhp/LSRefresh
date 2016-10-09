@@ -20,6 +20,7 @@
 		559B24D31D88FFFB002B119F /* UIView+LSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 559B24D11D88FFFB002B119F /* UIView+LSExtension.m */; };
 		55A2CBAF1DA8D71F001BDBBE /* LSRefreshNativeHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2CBAE1DA8D71F001BDBBE /* LSRefreshNativeHeader.m */; };
 		55A2CBB21DA8D730001BDBBE /* LSRefreshAutoFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2CBB11DA8D730001BDBBE /* LSRefreshAutoFooter.m */; };
+		55A2CC031DA9DE79001BDBBE /* SubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A2CC021DA9DE79001BDBBE /* SubViewController.m */; };
 		55E273321D9B6DD30046D5D5 /* LSRefreshFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E273311D9B6DD30046D5D5 /* LSRefreshFooter.m */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +50,8 @@
 		55A2CBAE1DA8D71F001BDBBE /* LSRefreshNativeHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSRefreshNativeHeader.m; sourceTree = "<group>"; };
 		55A2CBB01DA8D730001BDBBE /* LSRefreshAutoFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSRefreshAutoFooter.h; sourceTree = "<group>"; };
 		55A2CBB11DA8D730001BDBBE /* LSRefreshAutoFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSRefreshAutoFooter.m; sourceTree = "<group>"; };
+		55A2CC011DA9DE79001BDBBE /* SubViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubViewController.h; sourceTree = "<group>"; };
+		55A2CC021DA9DE79001BDBBE /* SubViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubViewController.m; sourceTree = "<group>"; };
 		55E273301D9B6DD30046D5D5 /* LSRefreshFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSRefreshFooter.h; sourceTree = "<group>"; };
 		55E273311D9B6DD30046D5D5 /* LSRefreshFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSRefreshFooter.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -90,6 +93,8 @@
 				55942F921D86483B00F267A4 /* AppDelegate.m */,
 				55942F941D86483B00F267A4 /* ViewController.h */,
 				55942F951D86483B00F267A4 /* ViewController.m */,
+				55A2CC011DA9DE79001BDBBE /* SubViewController.h */,
+				55A2CC021DA9DE79001BDBBE /* SubViewController.m */,
 				55942F971D86483B00F267A4 /* Main.storyboard */,
 				55942F9A1D86483B00F267A4 /* Assets.xcassets */,
 				55942F9C1D86483B00F267A4 /* LaunchScreen.storyboard */,
@@ -219,6 +224,7 @@
 				55942FAA1D8648F200F267A4 /* LSRefreshComponent.m in Sources */,
 				559B24D21D88FFFB002B119F /* UIScrollView+LSExtension.m in Sources */,
 				55A2CBAF1DA8D71F001BDBBE /* LSRefreshNativeHeader.m in Sources */,
+				55A2CC031DA9DE79001BDBBE /* SubViewController.m in Sources */,
 				55942FAB1D8648F200F267A4 /* LSRefreshHeader.m in Sources */,
 				55942F961D86483B00F267A4 /* ViewController.m in Sources */,
 				559B24CC1D88FFAC002B119F /* LSCircleIndicator.m in Sources */,

@@ -31,7 +31,6 @@ UITableViewDataSource
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.tableView.ls_insetTop = 30.f;
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.tableView.tableFooterView = [UIView new];
     for (NSUInteger i = 0; i < 5; i++) {

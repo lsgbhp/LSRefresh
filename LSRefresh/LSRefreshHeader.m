@@ -61,7 +61,7 @@ static const CGFloat kLSRefreshHeaderPullingToWillRefreshHeight = 100.f;
 
 - (void)setState:(LSRefreshState)state {
     
-//    if (state == self.state) return;
+    if (state == self.state) return;
     
     if (state == LSRefreshStateRefreshing) {
         [self.scrollView setContentOffset:CGPointMake(self.scrollView.ls_offsetX, -(self.scrollView.ls_insetTop + kLSRefreshHeaderHeight)) animated:YES];

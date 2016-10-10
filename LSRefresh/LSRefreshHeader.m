@@ -106,13 +106,10 @@ static const CGFloat kLSRefreshHeaderPullingToWillRefreshHeight = 100.f;
         self.ls_height = fabs(self.scrollView.ls_insetTop + self.scrollView.ls_offsetY);
     } else {
         self.ls_top = self.ls_height = 0.f;
-        if (self.state == LSRefreshStateFinish) {
-            self.state = LSRefreshStateIdel;
-        }
     }
     
     // 根据高度修改控件状态
-    if (self.state != LSRefreshStateRefreshing && self.state != LSRefreshStateFinish){
+    if (self.state != LSRefreshStateRefreshing){
         if (self.scrollView.isDragging) {
             if (self.ls_height < kLSRefreshHeaderIdleToPullingHeight) {
                 self.state = LSRefreshStateIdel;
@@ -133,12 +130,8 @@ static const CGFloat kLSRefreshHeaderPullingToWillRefreshHeight = 100.f;
     // 根据高度调整Indicator UI
     if (self.state != LSRefreshStateRefreshing) {
         if (self.ls_height <= kLSRefreshHeaderPullingToWillRefreshHeight) {
-            if (self.state != LSRefreshStateFinish) {
-                CGFloat progress = self.ls_height/kLSRefreshHeaderPullingToWillRefreshHeight;
-                self.indicator.progress = self.contentView.alpha = progress;
-            } else {
-                self.indicator.progress = self.contentView.alpha = 1.f;
-            }
+            CGFloat progress = self.ls_height/kLSRefreshHeaderPullingToWillRefreshHeight;
+            self.indicator.progress = self.contentView.alpha = progress;
         } else {
             self.indicator.progress = self.contentView.alpha = 1.f;
         }

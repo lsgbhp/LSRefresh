@@ -31,6 +31,7 @@ UITableViewDataSource
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.tableView.ls_insetTop = 30.f;
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.tableView.tableFooterView = [UIView new];
     for (NSUInteger i = 0; i < 5; i++) {
@@ -43,12 +44,8 @@ UITableViewDataSource
         self.refreshHeader = [LSRefreshHeader headerWithActionBlock:^{
             __strong typeof(weakSelf) strongSelf = weakSelf;
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [strongSelf addMoreData];
-                    [strongSelf.tableView reloadData];
-//                });
-                
-                
+                [strongSelf addMoreData];
+                [strongSelf.tableView reloadData];
                 [strongSelf.refreshHeader endRefreshing];
             });
         }];
@@ -132,6 +129,7 @@ UITableViewDataSource
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CellIdentifier"];
     }
+    cell.backgroundColor = [UIColor lightGrayColor];
     cell.textLabel.text = [NSString stringWithFormat:@"test %@", @(indexPath.row)];
     return cell;
 }

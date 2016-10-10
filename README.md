@@ -5,8 +5,8 @@
 
 ## Usage
 
-1. import `LSRefresh.h`.
-2. add header/footer to tableview, 	notice using `weakSelf` in action block.
+1. 引用 `LSRefresh.h`.
+2. 将 `header/footer` 添加至 `tableView/collectionView`， 注意在回调中需要使用 `weakSelf`避免循环使用。
 
 ```objc
 __weak typeof(self) weakSelf = self;
